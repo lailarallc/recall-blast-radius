@@ -98,3 +98,15 @@ Parked (needs explicit go-ahead — shared infra): cinderhaven-db's own `pg`-che
 - FDA inspection database mining
 - Real supplier/ingredient pricing
 - Recall insurance analysis
+
+---
+
+## Improvement History
+
+### 2026-09-23 — Audit (health check only)
+- **Findings:** 0 critical, 5 important, 4 nice-to-have
+- **Top concerns:** Workflow files are stale: PLAN/HANDOFF stop at 2026-07-18 while ~17 commits since (client mode, drift gate, CI deploys, OG card) are unrecorded, and there is no project CLAUDE.md. `requirements.txt` pins psycopg2-binary 2.9.9 (no Python 3.13 wheel, already hit once in FAILURES) while README says "Python 3.12+". Unused public `/api/trace` and `/api/lots` endpoints open a fresh connection to the shared cinderhaven-db per request with `CORS *` and no rate limit; per-case cost constants ($9/$14) now live in 3 places (graph.py, fct_blast_radius_scope.sql, client_mode.py) but the sync comments name only 2.
+- **Nice-to-have:** client-mode.yml comments/error text stale (says v0.2.1, installs v0.2.2; tells you to set a per-repo secret, contradicting org-level secrets); `superfly/flyctl-actions/setup-flyctl@master` unpinned; PLAN Open Questions table still shows resolved items as Open; `/api/lots` ILIKE search doesn't escape `%`/`_`.
+- **Checks run:** pytest 24/24 pass (tmp redirected in-repo); canonical drift gate clean; tree clean, on main, 1 local hook commit ahead of origin. Manual security/code/data pass replaced automated /security-review, /ce:review, data-science-reviewer.
+- **Action taken:** Audit only — no fixes this session
+- **Next review:** 2026-12-22
