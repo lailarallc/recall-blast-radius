@@ -2,6 +2,7 @@ import os
 import psycopg2
 from urllib.parse import urlparse, unquote
 from dagster import asset, AssetExecutionContext
+from pipeline import prod_guard
 from pipeline.generate_genealogy import generate_all
 
 
@@ -12,6 +13,7 @@ def _get_conn():
             "DATABASE_URL environment variable is required. "
             "Set it to your Postgres connection string (see .env.example)."
         )
+    prod_guard.check(database_url)  # refuses a fly tunnel to production
     p = urlparse(database_url)
     return psycopg2.connect(
         host=p.hostname,

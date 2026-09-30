@@ -11,6 +11,7 @@ import sys
 import psycopg2
 from urllib.parse import urlparse, unquote
 from pathlib import Path
+from pipeline import prod_guard
 from pipeline.generate_genealogy import generate_all
 
 
@@ -183,6 +184,7 @@ if __name__ == "__main__":
     for table, rows in data.items():
         print(f"  {table}: {len(rows)} rows")
 
+    prod_guard.check(database_url)  # refuses a fly tunnel to production
     try:
         conn = psycopg2.connect(**_parse_url(database_url))
     except Exception as e:
