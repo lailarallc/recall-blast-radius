@@ -1,0 +1,29 @@
+# Typed figures this repo prints with no canon key (owner, 2026-11-15; plan U19, U22).
+# One row per figure per location. The platform's fleet check holds the row count to a ceiling that only
+# falls: give a figure a key (or stop printing it) and delete its row. listed=yes: the read map names it, and
+# U19 owes its key; listed=no: U22 works it down. Generated from the 2026-11-15 manifest pass.
+file_line	printed	exact_value	meaning	source	kind	listed
+README.md:23	50 SKUs	50	SKU count, all-time	canon universe.skus_total	restatement	no
+README.md:23	5 product lines	5	product line count	canon universe.product_lines	restatement	no
+README.md:23	6 contracted retailers	6	contracted retailer count	canon universe.retailers	restatement	no
+client_mode.py:51	9.0	9.0	direct retrieval cost per case, low	constant client_mode.py:51	assumption	no
+client_mode.py:52	14.0	14.0	direct retrieval cost per case, high	constant client_mode.py:52	assumption	yes
+frontend/index.html:104	$10M+	10000000	full recall cost, industry average	stated industry benchmark	assumption	no
+frontend/index.html:110	~$3.7M	3657322.89	annual EBITDA estimate = 11% x $33.2M TTM retail scan	arithmetic 0.11 x 33,248,389.92 (canon revenue.retail_scan.ttm_through_2025_12_27); 11% is an assumption	fixed-input	yes
+frontend/index.html:111	~2.7 years	2.73	years of EBITDA a $10M recall erases ($10M / $3.66M)	arithmetic from $10M+ assumption and ~$3.7M	fixed-input	no
+frontend/index.html:319	$52K	52065	Scenario B direct retrieval cost, low	pipeline/cache/scenario_graphs.json [1].result.scope.cost_low	repo-export	no
+frontend/index.html:39	$10M+	10000000	full recall cost, industry average (hook stat)	stated industry benchmark	assumption	no
+frontend/index.html:83	23 affected lots	23	Scenario B lots affected	pipeline/cache/scenario_graphs.json [1].result.scope.lots_affected	repo-export	no
+frontend/index.html:83	6 retailers	6	Scenario B retailers to notify	pipeline/cache/scenario_graphs.json [1].result.scope.notification_list (length)	repo-export	no
+frontend/index.html:84	5,785 cases	5785	Scenario B cases still in channel	pipeline/cache/scenario_graphs.json [1].result.scope.cases_in_channel	repo-export	no
+frontend/index.html:84	47.8×	47.81	Scenario B / Scenario A cases in channel (5,785 / 121)	pipeline/cache/scenario_graphs.json [1] and [0].result.scope.cases_in_channel	repo-export	no
+frontend/index.html:98	$52K–$81K	52065	Scenario B direct retrieval cost, low (high 80990)	pipeline/cache/scenario_graphs.json [1].result.scope.cost_low / cost_high (5,785 cases x client_mode.py:51-52 $9-$14/case)	repo-export	no
+pipeline/generate_genealogy.py:15	$70/case	70	average revenue per case	docstring assumption	assumption	yes
+pipeline/generate_genealogy.py:46	180	180	Walmart door count	constant (store-universe door counts); canon stores_total 640	restatement	no
+pipeline/generate_genealogy.py:47	60	60	Costco door count	constant	restatement	no
+pipeline/generate_genealogy.py:48	120	120	Whole Foods door count	constant	restatement	no
+pipeline/generate_genealogy.py:49	90	90	Sprouts door count	constant	restatement	no
+pipeline/generate_genealogy.py:50	150	150	Kroger door count	constant	restatement	no
+pipeline/generate_genealogy.py:51	40	40	Regional Group door count	constant	restatement	no
+pipeline/generate_genealogy.py:56	357_000	357000	cases shipped per year (throughput constraint)	constant; docstring :15 says reconciles with canonical $25M revenue; canon volume.cases_b2b.cy2025 = 325807	fixed-input	yes
+pipeline/generate_genealogy.py:57	1_800	1800	average cases per production batch	constant	fixed-input	no
